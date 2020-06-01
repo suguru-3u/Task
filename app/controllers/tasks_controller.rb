@@ -4,8 +4,7 @@ before_action :set_project, only: [:edit, :update, :destroy]
   def new
     @today = Date.today
     @task = Task.new
-    @user = current_user
-    @tasks = @user.tasks.last(3)
+    @tasks = current_user.tasks.last(3)
   end
 
   def index
@@ -16,10 +15,10 @@ before_action :set_project, only: [:edit, :update, :destroy]
     @task = Task.new(task_params)
     @task.user_id = current_user.id
     if @task.save
-     redirect_to new_task_path
+      redirect_to new_task_path
     else
       @tasks = Task.all
-     render :new
+      render :new
     end
   end
 
