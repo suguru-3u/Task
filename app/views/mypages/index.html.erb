@@ -1,0 +1,80 @@
+<h2 class = 'text-center mt-3 mb-3  pb-2 border-bottom'>My Page</h2>
+<div class="container">
+  <div class="row pt-3 justify-content-between">
+    <div class="col-xs-4">
+      <div class="card">
+        <% if current_user.admin? %>
+        <%= image_tag 'subscribe-3534409_640.jpg',class: 'card-img-top'%>
+        <div class="card-body">
+          <h3 class='card-title'>ユーザー情報</h3>
+          <p class='card-text'>
+            <%= "name: #{@user.name}" %><br>
+          </p>
+          <%= link_to 'User編集',users_path,class: 'btn btn-info' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="card ">
+        <%= image_tag 'markus-winkler-OQ48N5FDW1w-unsplash.jpg',class: 'card-img-top'%>
+        <div class="card-body">
+          <h3 class='card-title'>Task情報</h3>
+          <p class='card-text'>
+            <%= "登録Task数: #{@user.tasks.count}" %>
+          </p>
+          <%= link_to 'Task投稿',new_task_path,class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="card">
+        <%= image_tag 'dylan-gillis-KdeqA3aTnBY-unsplash.jpg',class: 'card-img-top'%>
+        <div class="card-body">
+          <h3 class='card-title'>TeamTask情報</h3>
+          <p class='card-text'>
+            <%= "登録group数: #{@user.groups.count}" %>
+          </p>
+          <%= link_to 'Group作成',new_group_path,class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+        <% else %>
+          <%= image_tag 'subscribe-3534409_640.jpg',class: 'card-img-top'%>
+          <div class="card-body">
+            <h3 class='card-title'>ユーザー情報</h3>
+            <p class='card-text'>
+              <%= "name: #{@user.name}" %><br>
+            </p>
+            <%= link_to 'User編集',users_path,class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="card ">
+          <%= image_tag 'markus-winkler-OQ48N5FDW1w-unsplash.jpg',class: 'card-img-top'%>
+          <div class="card-body">
+            <h3 class='card-title'>Task情報</h3>
+            <p class='card-text'>
+              <%= "登録Task数: #{@user.tasks.count}" %>
+            </p>
+            <%= link_to 'Task投稿',new_task_path,class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="card">
+          <%= image_tag 'dylan-gillis-KdeqA3aTnBY-unsplash.jpg',class: 'card-img-top'%>
+          <div class="card-body">
+            <h3 class='card-title'>TeamTask情報</h3>
+            <p class='card-text'>
+              <%= "登録group数: #{@user.groups.count}" %>
+            </p>
+            <%= link_to 'Group作成',new_group_path,class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+        <% end %>
+
+</div>

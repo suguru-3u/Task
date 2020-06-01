@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-xs-3">
+    <div class=".chat-group-form">
+      <h2>新規チャットグループ</h2>
+      <%= form_for @group do |f| %>
+      <div class="chat-group-form__field">
+        <div class="chat-group-form__field--left">
+          <%= f.label :name, "グループ名", class: 'chat-group-form__label' %>
+          <div class="chat-group-form__field--right">
+            <%= f.text_field :name, class: 'chat__group_name chat-group-form__input', placeholder: 'グループ名を入力してください' %>
+          </div>
+        </div>
+      </div>
+      <div class="chat-group-form__field.clearfix">
+        <div class="chat-group-form__field.clearfix">
+          <div class="chat-group-form__field--left">
+            <%= f.label "グループメンバー", class: "chat-group-form__label" %>
+          </div>
+          <div class="chat-group-form__field--right">
+            <%= f.collection_check_boxes :user_ids, User.all, :id, :name %>
+          </div>
+        </div>
+      </div>
+      <div class="chat-group-form__field.clearfix">
+        <div class="chat-group-form__field--left">
+          <div class="chat-group-form__field--right">
+            <%= f.submit '編集',class: 'chat-group-form__action-btn' %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>

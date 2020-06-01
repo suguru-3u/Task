@@ -12,7 +12,7 @@
   <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container collapse navbar-collapse">
+          <div class="container collapse navbar-collapse h5">
           <ul class='navbar-nav mr-auto'>
             <li class="nav-item">
               <%= link_to ' Task', mypages_index_path,class: 'nav-link'%>
@@ -55,9 +55,6 @@
                 <%= link_to ' Top', root_path,class: 'nav-link'%>
               </li>
               <li class="nav-item">
-                <%= link_to ' About', homes_about_path,class: 'nav-link'%>
-              </li>
-              <li class="nav-item">
                 <%= link_to ' 新規登録', new_user_registration_path,class: 'nav-link'%>
               </li>
               <li class="nav-item">
@@ -68,8 +65,7 @@
           </div>
         </nav>
     </header>
-    <div class="container">
+
       <%= yield %>
-    </div>
   </body>
 </html>

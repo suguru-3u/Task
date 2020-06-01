@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   before_action :baria_user, only: [:update]
 
   def index
-    @user = current_user
-    @users = User.all
   end
 
   def edit
