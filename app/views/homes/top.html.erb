@@ -1,22 +1,19 @@
-<div>
-  <h2>ようこそTask_appへ</h2>
-  <p>さあ、数あるタスクを管理し仕事を効率よくこなしていきましょう！</p>
+<div class="jumbotron">
+ <div class="container top pt-5">
+   <div class="top-message">
+     <h1>ようこそTask_appへ</h1>
+     <p class="h3">さあ、数あるタスクを管理し仕事を効率よくこなしていきましょう！</p>
+     <div class="mt-4">
+       <%= link_to '新規館員登録',new_user_registration_path,class: 'btn btn-success mr-3' %>
+       <%= link_to 'ログイン',new_user_session_path,class: 'btn btn-primary' %>
+     </div>
+   </div>
+ </div>
 </div>
-<div>
-  <p>Task_appサービスの詳細についてはこちらをクリックしたください！</p>
-  <%= link_to '詳細',homes_about_path,class: 'btn btn-info' %>
-</div>
-<div>
-  <%= link_to '新規館員登録'new_user_registration_path,class: 'btn btn-success' %>
-</div>
-<div>
-  <%= link_to 'ログイン'new_user_session_path,class: 'btn btn-primary' %>
-</div>
-<h2>Task_appサービスについて</h2>
-
-<div>
-  <h3>サービス内容</h3>
-  <p>
+<div class="pt-3 pb-5 introduce top-p">
+<h2 class="text-center mb-2 ">Task_appサービスについて</h2>
+  <h3 class=" text-center mt-2 mb-3">サービス内容</h3>
+  <p class=" p-5 border border-secondary h5">
     みなさん、以下のようなご経験はございませんか？<br>
     ・抱えているTaskが多過ぎて何から手をつけていいのかわからなくなる。<br>
     ・Taskの数の多さから、Taskが漏れてしまったこと<br>
@@ -28,34 +25,67 @@
     さあ、Task_appでTaskを管理して仕事の効率化、ミスをなくしていきましょう！
   </p>
 </div>
-<div>
-  <h3>Task_appでできること</h3>
-  <ul>
-    <li>
-      タスクをWeb上に描き出せる。
-      抱えているタスクの数を可視化できる。
-      チームでタスクを管理できる。
-      チームないですぐに連絡をとりたい際にメッセージを送ることができる。
-      csvファイルにTaskデータを出力、取り込みできる。
-    </li>
-  </ul>
+<div class='top-Task pb-5'>
+  <h2 class="text-center pt-5 pb-5">Task_appでできること</h2>
+  <div class="container-fluid">
+    <div class="row ">
+      <div class="col-6 h4 mt-5">
+        <ul>
+          <li>
+            タスクをWeb上に描き出せる。
+          </li>
+          <li>
+            抱えているタスクの数を可視化できる。
+          </li>
+          <li>
+            チームでタスクを管理できる。
+          </li>
+          <li>
+            チームないですぐに連絡をとりたい際にメッセージを送ることができる。
+          </li>
+          <li>
+            csvファイルにTaskデータを出力、取り込みできる。
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 ">
+        <%= image_tag 'markus-winkler-OQ48N5FDW1w-unsplash.jpg' ,class:'rounded-circle'%>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid top-Task pb-5">
+  <h2 class="text-center mb-5">Task_appのご利用に向いている方</h2>
+  <div class="row">
+    <div class="col-6">
+      <%= image_tag 'markus-winkler-OQ48N5FDW1w-unsplash.jpg',class:'rounded-circle'%>
+    </div>
+    <div class="col-xs-6 h4 mt-5">
+      <ul>
+        <li>
+          Task管理を行いたいと思っている方
+        </li>
+        <li>
+          日々のTask数が多く困っている方。
+        </li>
+        <li>
+          テームでTask管理を行いたいと思っている方
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 <div>
-  <h3>Task_appのご利用に向いている方</h3>
-  <ul>
-    <li>
-      Task管理を行いたいと思っている方
-    </li>
-    <li>
-      日々のTask数が多く困っている方。
-    </li>
-    <li>
-      テームでTask管理を行いたいと思っている方
-    </li>
-  </ul>
-</div>
-<div>
-  <h4>さあ、Task_appを利用してみよう!</h4>
-  <%= link_to '新規館員登録'new_user_registration_path,class: 'btn btn-success' %>
-  <%= link_to 'ログイン'new_user_session_path,class: 'btn btn-primary' %>
+<div class="container top-m-message text-center mb-5 pb-5">
+  <h2 class=" mt-5 mb-5">さあ、Task_appを利用してみよう!</h2>
+  <div class="row ">
+    <div class="col-6">
+      <p class='h4'>初めて利用する方はこちらから</p>
+      <%= link_to '新規館員登録',new_user_registration_path,class: 'btn btn-success' %>
+    </div>
+    <div class="col-6">
+      <p class='h4'>利用したことがある方はこちらから</p>
+      <%= link_to 'ログイン',new_user_session_path,class: 'btn btn-primary' %>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,26 @@
+<div class="row mt-5">
+  <div class='col-xs-4'>
+    <h2 class='text-center'>TeamTask登録</h2>
+
+    <%= form_for(@project, url: group_project_path(@group,@project)) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, 'Task名' %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body, 'Task詳細' %>
+      <%= f.text_field :body, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :responsible, 'Task担当者' %>
+      <%= f.text_field :responsible, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Task完了日</label>
+      <%= f.date_select :end_date, {}%>
+    </div>
+
+    <%= f.submit '編集', class: 'btn btn-info btn-block' %>
+    <% end %>
+  </div>
+</div>

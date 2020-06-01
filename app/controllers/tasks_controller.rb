@@ -9,8 +9,7 @@ before_action :set_project, only: [:edit, :update, :destroy]
   end
 
   def index
-    @user = current_user
-    @tasks = @user.tasks
+    @tasks = current_user.tasks
   end
 
   def create
@@ -18,10 +17,10 @@ before_action :set_project, only: [:edit, :update, :destroy]
     @task.user_id = current_user.id
     if @task.save
      redirect_to new_task_path
-   else
-     @tasks = Task.all
+    else
+      @tasks = Task.all
      render :new
-   end
+    end
   end
 
   def edit
