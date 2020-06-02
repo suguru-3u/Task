@@ -9,6 +9,20 @@ before_action :set_project, only: [:edit, :update, :destroy]
 
   def index
     @tasks = current_user.tasks
+    respond_to do |format|
+      format.html do
+          #html用の処理を書く
+      end
+      format.csv do
+          #csv用の処理を書く
+          send_data render_to_string, filename: "(Tasks).csv", type: :csv
+      end
+    end
+  end
+
+  def import
+    Tasks.import(params[:file])
+    redirect_to tasks_path
   end
 
   def create
