@@ -10,19 +10,9 @@ before_action :set_project, only: [:edit, :update, :destroy]
   def index
     @tasks = current_user.tasks
     respond_to do |format|
-      format.html do
-          #html用の処理を書く
-      end
-      format.csv do
-          #csv用の処理を書く
-          send_data render_to_string, filename: "(Tasks).csv", type: :csv
-      end
+      format.html
+      format.csv{ send_data @tasks.generate_csv,fiilename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
     end
-  end
-
-  def import
-    Tasks.import(params[:file])
-    redirect_to tasks_path
   end
 
   def create
@@ -50,6 +40,24 @@ before_action :set_project, only: [:edit, :update, :destroy]
   def destroy
     @task.destroy
     redirect_to tasks_path, notice: "successfully delete task!"
+  end
+
+  def import
+    if params[:file]
+      current_user.tasks.import(params[:file])
+      redirect_to tasks_path,notice:"タスクを追加しました"
+    else
+      redirect_to tasks_path,notice:"ファイルを選択してください"
+    end
+  end
+
+  def search
+    respond_to do |format|
+    format.html
+      @tasks = current_user.tasks.none if params[:name].present?
+      @tasks = current_user.tasks.where(['name LIKE ? OR body LIKE ?', "%#{params[:name]}%", "%#{params[:name]}%"])
+    format.json
+   end
   end
 
   private
