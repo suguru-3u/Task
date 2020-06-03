@@ -30,4 +30,11 @@ class Task < ApplicationRecord
     end
   end
 
+# # インクリメンタルサーチ
+#   def self.search(search)
+#     return current_user.tasks.none unless search
+#     task = Task.where(['name LIKE ? ', "%#{search}%"])
+#   end
+
+
 end
