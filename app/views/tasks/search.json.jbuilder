@@ -1,3 +1,3 @@
-json.array! @task do |task|
-  json.name task.name
+json.array! @tasks do |tasks|
+  json.name tasks.name
 end

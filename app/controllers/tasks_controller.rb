@@ -52,7 +52,7 @@ before_action :set_project, only: [:edit, :update, :destroy]
   end
 
   def search
-   @task = Task.search(params[:name])
+   params[:name].empty? ? @tasks = current_user.tasks.none : @tasks = current_user.tasks.where('name LIKE(?)', "%#{params[:name]}%")
    respond_to do |format|
     format.html
     format.json
