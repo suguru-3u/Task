@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      NotificationMailer.complete_mail(@user).deliver_now 
   		redirect_to users_path, notice: "successfully updated user!"
   	else
   		render :edit

@@ -1,51 +1,128 @@
 <%# 投稿フォームページ %>
 
-<p class="text-center pt-4 h2">
-  日付:<%= @today %>
-</p>
+<h2 class="text-center pt-4">Task登録フォーム</h2>
 
-<h2>Task登録フォーム</h2>
+<div class="container">
+  <p class="pt-4 h2">
+    日付:<%= @today %>
+  </p>
 
-<%# エラーメッセージがあった場合に表示させる %>
-<%= render partial: 'layouts/errors', locals: { task: @task } %>
+  <div>
+    <h3>世界の天気</h3>
+    <label>都市名：</label>
+    <input id="cityname" type="text" size="14" maxlength="14" placeholder="Tokyo">
+    <button id="btn">検索</button><br>
+    <span>場所 :</span>
+    <span id="place"></span><br>
+    <span>最高気温 :</span>
+    <span id="temp_max"></span>
+    <span> ℃</span><br>
+    <span>最低気温 :</span>
+    <span id="temp_min"></span>
+    <span> ℃</span><br>
+    <span>天気 :</span>
+    <span id="weather"></span>
+    <div id="icon"><img id="img"></div>
+  </div>
 
-<%# 投稿フォーム %>
-<%= render partial: 'form', locals: { task: @task, text: '登録',path: tasks_path } %>
+  <%# エラーメッセージがあった場合に表示させる %>
+  <%= render partial: 'layouts/errors', locals: { task: @task } %>
 
-<h2 class='mt-5'>直近の登録Task3件</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>本文</th>
-      <th>登録日時</th>
-      <th>完了日時</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tasks.each do |tasks| %>
-    <tr>
-      <td>
-        <%= tasks.name %>
-      </td>
-      <td>
-        <%= tasks.body %>
-      </td>
-      <td class='time'>
-        <%= tasks.created_at.to_s(:datetime_jp)  %>
-      </td>
-      <td>
-        <%= tasks.end_date %>
-      </td>
-      <td>
-        <%= link_to '詳細',edit_task_path(tasks),class: 'btn btn-success' %>
-      </td>
-      <td>
-        <%= link_to '削除',task_path(tasks), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"},class: 'btn btn-danger' %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <%# 投稿フォーム %>
+  <%= render partial: 'form', locals: { task: @task, text: '登録',path: tasks_path } %>
+
+  <h2 class='mt-5'>直近の登録Task3件</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>本文</th>
+        <th>登録日時</th>
+        <th>完了日時</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |tasks| %>
+      <tr>
+        <td>
+          <%= tasks.name %>
+        </td>
+        <td>
+          <%= tasks.body %>
+        </td>
+        <td class='time'>
+          <%= tasks.created_at.to_s(:datetime_jp)  %>
+        </td>
+        <td>
+          <%= tasks.end_date %>
+        </td>
+        <td>
+          <%= link_to '詳細',edit_task_path(tasks),class: 'btn btn-success' %>
+        </td>
+        <td>
+          <%= link_to '削除',task_path(tasks), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"},class: 'btn btn-danger' %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<script>
+  $(function(){
+    var API_KEY = '5ad6c5ef4196a96b3ed9a1d487be0d17'
+    $('#btn').on('click', function() {
+      // 入力された都市名でWebAPIに天気情報をリクエスト
+      $.ajax({
+        url: "http://api.openweathermap.org/data/2.5/weather?q=" + $('#cityname').val() + "&units=metric&appid=" + API_KEY,
+        dataType : 'jsonp',
+      }).done(function (data){
+          //通信成功
+          // 位置
+          $('#place').text(data.name);
+          // 最高気温
+          $('#temp_max').text(data.main.temp_max);
+          // 最低気温
+          $('#temp_min').text(data.main.temp_min);
+          //　湿度
+          $('#humidity').text(data.main.humidity);
+          //　風速
+          $('#speed').text(data.wind.speed);
+          // 天気
+          $('#weather').text(data.weather[0].main);
+          // 天気アイコン
+          $('img').attr("src","http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+          $('img').attr("alt",data.weather[0].main);
+      }).fail(function (data) {
+         //通信失敗
+      });
+    });
+  });
+// $(function() {
+//   var API_KEY = '5ad6c5ef4196a96b3ed9a1d487be0d17'
+//   var city = 'Tokyo';
+//   var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + ',jp&units=metric&APPID=' + API_KEY;
+//   $.ajax({
+//     url: url,
+//     dataType: "json",
+//     type: 'GET',
+//   })
+//   .done(function(data) {
+//     // 場所
+//     var cityName = '<h2>' + data.city.name + '</h2>';
+//     // 最高気温
+//     $('#temp_max').text(data.city.temp_max);
+//     // 最低気温
+//     $('#temp_min').text(data.city.temp_min);
+//     // 天気
+//     // $('#weather').text(data.weather[0].city);
+//     // // 天気アイコン
+//     // $('img').attr("src","http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+//     // $('img').attr("alt",data.weather[0].city);
+//     })
+//   .fail(function(data) {
+//      console.log("失敗しました");
+//   });
+// });
+</script>

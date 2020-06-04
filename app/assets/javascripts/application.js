@@ -36,15 +36,3 @@
 //   }
 // }
 // 処理の実行エリア
-
-$(function() {
-  $("#search-input").on("keyup", function() {
-    let input = $("#search-input").val();
-    console.log(input);
-    $.ajax({
-      type: 'GET',
-      url: '/sample/search',
-      data: { keyword: input },
-      dataType: 'json'
-  });
-});
